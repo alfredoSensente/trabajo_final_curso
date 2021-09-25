@@ -5,7 +5,7 @@ from .services import get_query_four, get_username
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the final challenge index.")
+    return render(request, 'final_challenge/templates/index.html')
 
 def hello_user(requests):
     context = {

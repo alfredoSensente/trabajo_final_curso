@@ -11,11 +11,11 @@ def hello_user(requests):
     context = {
         'name': get_username()
     }
-    return render(requests, 'final_challenge/hello_user.html', context)
+    return render(requests, 'final_challenge/templates/hello_user.html', context)
 
 def query_four(requests):
     """"El total de personas que vieron cada pelicula en centroamerica"""
     context = {
         'query_four': get_query_four()
     }
-    return render(requests, 'final_challenge/table_four.html', context)
+    return render(requests, 'final_challenge/templates/table_four.html', context)

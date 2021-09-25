@@ -1,0 +1,13 @@
+{% extends 'final_challenge/templates/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+{% for choices in query_four %}
+<ul>
+    {% for key, value in choices.items %}
+    <li>{{value}}</li>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endblock content %}
+

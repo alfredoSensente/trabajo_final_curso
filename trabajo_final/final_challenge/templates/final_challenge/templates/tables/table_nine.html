@@ -1,0 +1,69 @@
+{% extends 'final_challenge/templates/layouts/base.html' %}
+{% load static %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<h4>Consulta 9</h4>
+<p>Total de personas por cadena de cine, por pais, por semana en porcentaje</p>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="inputFechaInicio" class="form-label">Fecha Inicio</label>
+        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio">
+    </div>
+    <div class="mb-3">
+        <label for="inputFechaFinal" class="form-label">Fecha Fin</label>
+        <input type="date" class="form-control" id="inputFechaFinal" name="inputFechaFinal">
+    </div>
+    <div class="col-3">
+        <select class="form-select" name="inputPais" id="inputPais">
+            <option value="EL SALVADOR">El Salvador</option>
+            <option value="GUATEMALA">Guatemala</option>
+            <option value="COSTA RICA">Costa Rica</option>
+            <option value="HONDURAS">Honduras</option>
+            <option value="NICARAGUA">Nicaragua</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-secondary">Consultar</button>
+</form>
+
+<div class="tabla-centro">
+    {% if query_nine %}
+    <p>Registros de la semana {{ fecha_inicio }} a {{ fecha_final }} en el pais de {{ pais }}</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Pelicula</th>
+                <th scope="col">Cadena</th>
+                <th scope="col">Asistencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key_dict, value_dict in query_nine.items %}
+            <tr>
+                    
+                    <td>{{ value_dict.Pelicula }}</td>
+                    <td>{{ value_dict.Cadena }}</td>
+                    <td>{{ value_dict.Porcentaje }}%</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+
+{% endblock javascripts %}

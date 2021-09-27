@@ -7,7 +7,8 @@
 <div class="col-auto">
   <div class="card ">
     <div class="card-header">
-      <h4 class="card-title"> Simple Table</h4>
+      <h4 class="card-title">Consulta 4</h4>
+      <p>El total de personas que vieron cada pelicula en centroamerica</p>
     </div>
     <div class="card-body">
       <div class="">
@@ -23,9 +24,9 @@
             </tr>
           </thead>
           <tbody>
-            {% for choices in query_four %}
+            {% for diccionarios in query_four %}
             <tr>
-              {% for key, value in choices.items %}
+              {% for key, value in diccionarios.items %}
               
               {% if value.Titulo %}
               <td>{{ value.Titulo }}</td>

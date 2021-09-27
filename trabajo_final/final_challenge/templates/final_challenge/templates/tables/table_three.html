@@ -1,0 +1,67 @@
+{% extends 'final_challenge/templates/layouts/base.html' %}
+{% load static %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<h4>Consulta 3</h4>
+<p>Mostrar de cada pais el total de personas que visitaron el cine en la semana</p>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="inputFechaInicio" class="form-label">Fecha Inicio</label>
+        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="inputFechaFinal" class="form-label">Fecha Fin</label>
+        <input type="date" class="form-control" id="inputFechaFinal" name="inputFechaFinal">
+    </div>
+    <button type="submit" class="btn btn-secondary">Consultar</button>
+</form>
+
+<div class="tabla-centro">
+    {% if query_three %}
+    <p>Registros de la semana {{ fecha_inicio }} a {{ fecha_final }}</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Pais</th>
+                <th scope="col">Cadena</th>
+                <th scope="col">Asistencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for diccionarios in query_three %}
+            <tr>
+              {% for key, value in diccionarios.items %}
+              
+              {% if value.Pais %}
+              <td>{{ value.Pais }}</td>
+              {% if value.Cadena %}
+                  <td>{{ value.Cadena }}</td>
+              {% endif %}
+              {% else %}
+              <td>{{value}}</td>
+              {% endif %}
+              
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+
+{% endblock javascripts %}

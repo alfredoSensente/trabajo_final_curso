@@ -1,6 +1,7 @@
 """Final challenge views"""
 from django.urls import path
 #Consultas
+from .views import import_data
 from .views import query_one
 from .views import query_two
 from .views import query_three
@@ -14,6 +15,7 @@ from .views import query_nine
 app_name = 'final_challenge'
 
 urlpatterns = [
+    path('', import_data, name='import_data'),
     path('query_one/', query_one, name='query_one'),
     path('query_two/', query_two, name='query_two'),
     path('query_three', query_three, name='query_three'),

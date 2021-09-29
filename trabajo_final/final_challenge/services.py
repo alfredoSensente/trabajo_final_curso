@@ -13,6 +13,16 @@ def generate_request(url):
 
     return ERROR
 
+#IMPORT DATA
+def get_import_data():
+    """Importa los datos a la db en mongo"""
+    response_import = generate_request(
+        'http://localhost:4000/api/data/importcsv'
+    )
+    if response_import:
+        return response_import
+    return ERROR
+
 #QUERY ONE
 def get_query_one(fecha_inicio, fecha_final, anio):
     """docstring"""

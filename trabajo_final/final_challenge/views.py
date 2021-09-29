@@ -1,5 +1,8 @@
 """Views de final_challenge"""
 from django.shortcuts import render
+
+from .services import get_import_data
+
 from .services import get_query_one
 from .services import get_query_four
 from .services import get_query_two
@@ -18,6 +21,15 @@ from .services import get_fecha_pais_pelicula
 
 
 # Create your views here.
+
+def import_data(request):
+    """importa los datos"""
+    if request.method == 'POST':
+        context = {
+            'import_data': get_import_data()
+        }
+        return render(request, 'final_challenge/templates/import_data.html', context)
+    return render(request, 'final_challenge/templates/import_data.html')
 
 def query_one(request):
     """Formulario para ingresar los parametros para mostrar template table_one"""

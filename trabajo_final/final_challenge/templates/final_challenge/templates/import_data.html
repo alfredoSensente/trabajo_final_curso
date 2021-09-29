@@ -1,0 +1,30 @@
+{% extends 'final_challenge/templates/layouts/base.html' %}
+{% load static %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary">Importar Datos</button>
+</form>
+
+
+{% if import_data %}
+    {{ import_data }}
+{% endif %}
+    
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+
+{% endblock javascripts %}

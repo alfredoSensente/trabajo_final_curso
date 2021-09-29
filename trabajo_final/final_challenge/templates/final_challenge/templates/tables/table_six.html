@@ -9,28 +9,40 @@
     <div class="card-header">
       <h4 class="card-title">Consulta 6</h4>
       <p>El total de personas que vieron cada pelicula en centroamerica por cadena de cine</p>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="inputTextPelicula" class="form-label">Pelicula</label>
+          <input type="text" class="form-control" id="inputTextPelicula" name="inputTextPelicula">
+        </div>
+        <button type="submit" class="btn btn-secondary">Consultar</button>
+      </form>
+      {% if pelicula %}
+      <h4>{{ pelicula }}</h4>
+      {% endif %}
     </div>
+      
+    {% if query_six %}
     <div class="card-body">
       <div class="">
         <table class="table tablesorter " id="">
           <thead class=" text-primary">
             <tr>
-                <th>Cadena</th>
-                <th>Titulo</th>
-                <th>Porcentaje</th>
+              <th>Cadena</th>
+              <th>Porcentaje</th>
             </tr>
           </thead>
           <tbody>
             {% for key_dict, value_dict in query_six.items %}
             <tr>
               {% for key, value in value_dict.items %}
-                
+
               {% if key == 'Porcentaje' %}
               <td>{{ value }}%</td>
-              {% else %}
+              {% elif key == 'Cadena' %}
               <td>{{ value }}</td>
               {% endif %}
-                
+
               {% endfor %}
             </tr>
             {% endfor %}
@@ -38,6 +50,7 @@
         </table>
       </div>
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}

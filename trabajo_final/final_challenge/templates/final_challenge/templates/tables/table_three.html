@@ -10,11 +10,19 @@
     {% csrf_token %}
     <div class="mb-3">
         <label for="inputFechaInicio" class="form-label">Fecha Inicio</label>
-        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio" aria-describedby="emailHelp">
+        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio">
     </div>
     <div class="mb-3">
         <label for="inputFechaFinal" class="form-label">Fecha Fin</label>
         <input type="date" class="form-control" id="inputFechaFinal" name="inputFechaFinal">
+    </div>
+    <div class="mb-3">
+        <label for="inputTextPais" class="form-label">Pais</label>
+        <input type="text" class="form-control" id="inputTextPais" name="inputTextPais">
+    </div>
+    <div class="mb-3">
+        <label for="inputTextCadena" class="form-label">Cadena</label>
+        <input type="text" class="form-control" id="inputTextCadena" name="inputTextCadena">
     </div>
     <button type="submit" class="btn btn-secondary">Consultar</button>
 </form>
@@ -22,6 +30,15 @@
 <div class="tabla-centro">
     {% if query_three %}
     <p>Registros de la semana {{ fecha_inicio }} a {{ fecha_final }}</p>
+    
+    {% if pais %}
+        <p>Pais: {{ pais }}</p>
+    {% endif %}
+    
+    {% if cadena %}
+        <p>Cadena: {{ cadena }}</p>
+    {% endif %}
+        
     <table class="table table-hover">
         <thead>
             <tr>
@@ -33,21 +50,21 @@
         <tbody>
             {% for diccionarios in query_three %}
             <tr>
-              {% for key, value in diccionarios.items %}
-              
-              {% if value.Pais %}
-              <td>{{ value.Pais }}</td>
-              {% if value.Cadena %}
-                  <td>{{ value.Cadena }}</td>
-              {% endif %}
-              {% else %}
-              <td>{{value}}</td>
-              {% endif %}
-              
-              {% endfor %}
+                {% for key, value in diccionarios.items %}
+
+                {% if value.Pais %}
+                <td>{{ value.Pais }}</td>
+                {% if value.Cadena %}
+                <td>{{ value.Cadena }}</td>
+                {% endif %}
+                {% else %}
+                <td>{{value}}</td>
+                {% endif %}
+
+                {% endfor %}
             </tr>
             {% endfor %}
-          </tbody>
+        </tbody>
     </table>
     {% endif %}
 </div>

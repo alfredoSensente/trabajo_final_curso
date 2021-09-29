@@ -5,19 +5,29 @@
 
 {% block content %}
 <h4>Consulta 7</h4>
-<p>Mostrar para cada pelicula el total de personas que acudieron a verla en la semana por pais y ordenarla de la más vista a la menos vista</p>
+<p>Mostrar para cada pelicula el total de personas que acudieron a verla en la semana por pais y ordenarla de la más
+    vista a la menos vista</p>
+
 <form method="POST">
     {% csrf_token %}
     <div class="mb-3">
         <label for="inputFechaInicio" class="form-label">Fecha Inicio</label>
-        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio" aria-describedby="emailHelp">
+        <input type="date" class="form-control" id="inputFechaInicio" name="inputFechaInicio"
+            aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
         <label for="inputFechaFinal" class="form-label">Fecha Fin</label>
         <input type="date" class="form-control" id="inputFechaFinal" name="inputFechaFinal">
     </div>
+    <div class="mb-3">
+        <label for="inputTextPelicula" class="form-label">Pelicula</label>
+        <input type="text" class="form-control" id="inputTextPelicula" name="inputTextPelicula">
+    </div>
     <button type="submit" class="btn btn-secondary">Consultar</button>
 </form>
+{% if pelicula %}
+<h4>{{ pelicula }}</h4>
+{% endif %}
 
 <div class="tabla-centro">
     {% if query_seven %}
@@ -34,20 +44,42 @@
             {% for diccionarios in query_seven %}
             <tr>
                 {% for key, value in diccionarios.items %}
-              
+
                 {% if value.Title %}
                 <td>{{ value.Title }}</td>
                 <td>{{ value.Pais }}</td>
                 {% else %}
                 <td>{{value}}</td>
                 {% endif %}
-                
+
                 {% endfor %}
             </tr>
             {% endfor %}
-          </tbody>
+        </tbody>
     </table>
     {% endif %}
+    
+    {% if movies %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Pelicula</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for diccionarios in movies %}
+            <tr>
+                {% for key, value in diccionarios.items %}
+
+                <td>{{ value.Titulo }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+        
 </div>
 
 {% endblock content %}

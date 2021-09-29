@@ -9,9 +9,18 @@
     <div class="card-header">
       <h4 class="card-title">Consulta 4</h4>
       <p>El total de personas que vieron cada pelicula en centroamerica</p>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="inputTextPelicula" class="form-label">Pelicula</label>
+          <input type="text" class="form-control" id="inputTextPelicula" name="inputTextPelicula">
+        </div>
+        <button type="submit" class="btn btn-secondary">Consultar</button>
+      </form>
     </div>
     <div class="card-body">
       <div class="">
+        {% if query_four %}
         <table class="table tablesorter " id="">
           <thead class=" text-primary">
             <tr>
@@ -19,7 +28,7 @@
                 Pelicula
               </th>
               <th>
-                Asistencia
+                Asistencia Total
               </th>
             </tr>
           </thead>
@@ -27,18 +36,52 @@
             {% for diccionarios in query_four %}
             <tr>
               {% for key, value in diccionarios.items %}
-              
+
               {% if value.Titulo %}
               <td>{{ value.Titulo }}</td>
               {% else %}
               <td>{{value}}</td>
               {% endif %}
-              
+
               {% endfor %}
             </tr>
             {% endfor %}
           </tbody>
         </table>
+        {% endif %}
+
+        {% if query_five %}
+        <div class="card-body">
+          <div class="">
+            <table class="table tablesorter " id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Cadena</th>
+                  <th>Asistencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for diccionarios in query_five %}
+                <tr>
+                  {% for key, value in diccionarios.items %}
+
+                  {% if value.Titulo %}
+                    {% if value.Cadena %}
+                    <td>{{ value.Cadena }}</td>
+                    {% endif %}
+                  {% else %}
+                  <td>{{value}}</td>
+                  {% endif %}
+
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </div>
